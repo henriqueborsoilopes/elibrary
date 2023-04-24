@@ -4,6 +4,8 @@ package br.unipar.elibrary.entities;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+import br.unipar.elibrary.entities.enums.PaymentStatus;
+
 public class CreditCardPaymentEntity extends PaymentEntity {
     
     private int installment;
@@ -12,8 +14,8 @@ public class CreditCardPaymentEntity extends PaymentEntity {
     
     public CreditCardPaymentEntity() { }
 
-    public CreditCardPaymentEntity(int instalment, CardFlagEntity flag, Long id, Instant moment, BigDecimal paidPrice, OrderEntity order) {
-        super(id, moment, paidPrice, order);
+    public CreditCardPaymentEntity(int instalment, CardFlagEntity flag, Long id, Instant moment, BigDecimal paidPrice, PaymentStatus status, OrderEntity order) {
+        super(id, moment, paidPrice, status, order);
         this.installment = instalment;
         this.flag = flag;
     }

@@ -1,6 +1,7 @@
 package br.unipar.elibrary;
 
 import br.unipar.elibrary.entities.*;
+import br.unipar.elibrary.entities.enums.PaymentStatus;
 import br.unipar.elibrary.entities.exceptions.IllegalDataException;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -97,9 +98,9 @@ public class Application {
             
             CardFlagEntity mastercard = new CardFlagEntity(1L, "Mastercard");
         
-            PaymentEntity pay2 = new CreditCardPaymentEntity(1, mastercard, 2L, new Date().toInstant(), order.getSubTotalPrice().divide(divisor, 3), order);
-            PaymentEntity pay1 = new CashPaymentEntity(new BigDecimal(0), 1L, new Date().toInstant(), order.getSubTotalPrice().divide(divisor, 3), order);
-            PaymentEntity pay3 = new DebitCardPaymentEntity(mastercard, 3L, new Date().toInstant(), order.getSubTotalPrice().divide(divisor,3), order);
+            PaymentEntity pay2 = new CreditCardPaymentEntity(1, mastercard, 2L, new Date().toInstant(), order.getSubTotalPrice().divide(divisor, 3), PaymentStatus.SETTLED, order);
+            PaymentEntity pay1 = new CashPaymentEntity(new BigDecimal(0), 1L, new Date().toInstant(), order.getSubTotalPrice().divide(divisor, 3), PaymentStatus.SETTLED, order);
+            PaymentEntity pay3 = new DebitCardPaymentEntity(mastercard, 3L, new Date().toInstant(), order.getSubTotalPrice().divide(divisor,3), PaymentStatus.SETTLED, order);
                         
             order.addPayments(pay1);
             order.addPayments(pay2);

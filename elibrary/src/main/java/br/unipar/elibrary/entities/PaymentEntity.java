@@ -4,20 +4,24 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
+import br.unipar.elibrary.entities.enums.PaymentStatus;
+
 public class PaymentEntity {
     
     private Long id;
     private Instant moment;
     private BigDecimal paidPrice;
+    private Integer status;
     
     private OrderEntity order;
     
     public PaymentEntity() { }
 
-    public PaymentEntity(Long id, Instant moment, BigDecimal paidPrice, OrderEntity order) {
+    public PaymentEntity(Long id, Instant moment, BigDecimal paidPrice, PaymentStatus status, OrderEntity order) {
         this.id = id;
         this.moment = moment;
         this.paidPrice = paidPrice;
+        this.status = status.getCode();
         this.order = order;
     }
 
@@ -45,7 +49,15 @@ public class PaymentEntity {
         this.paidPrice = paidPrice;
     }
 
-    public OrderEntity getOrder() {
+    public PaymentStatus getStatus() {
+		return PaymentStatus.toEnum(status);
+	}
+
+	public void setStatus(PaymentStatus status) {
+		this.status = status.getCode();
+	}
+
+	public OrderEntity getOrder() {
         return order;
     }
 
